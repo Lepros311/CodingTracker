@@ -1,8 +1,6 @@
 ﻿using CodingTracker;
-using System.Data.SQLite;
-using System.Configuration;
-using System.Collections.Specialized;
 using CodingTracker.Model;
+using System.Configuration;
 
 string? userInput;
 string? menuChoice;

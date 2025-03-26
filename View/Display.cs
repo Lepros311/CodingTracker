@@ -2,12 +2,12 @@
 using System.Data.SQLite;
 using CodingTracker.Model;
 using Spectre.Console;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CodingTracker
 {
     public static class Display
     {
-
         public static string PrintMainMenu()
         {
             Console.Clear();
@@ -23,7 +23,6 @@ namespace CodingTracker
 
             return menuChoice;
         }
-
 
         public static void PrintReport((int TotalDistinctDays, int TotalSessions, string TotalDuration) reportData)
         {
@@ -60,7 +59,6 @@ namespace CodingTracker
             AnsiConsole.Write(table);
             
         }
-
 
         public static void PrintAllRecords(string heading)
         {
@@ -105,6 +103,14 @@ namespace CodingTracker
             // Render the table
             AnsiConsole.Write(table);
         }
-    }
+
+        public static void PrintEditRecordData(int recordId, DateTime date, DateTime startTime, DateTime endTime)
+        {
+            Console.WriteLine($"Selected record ID: {recordId}");
+            Console.WriteLine($"Date: {date:yyyy-MM-dd}");
+            Console.WriteLine($"Start Time: {startTime}");
+            Console.WriteLine($"End Time: {endTime}");
         }
+    }
+}
     
