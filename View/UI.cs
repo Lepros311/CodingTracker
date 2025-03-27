@@ -83,12 +83,11 @@ namespace CodingTracker
         {
             do
             {
-                Console.WriteLine($"{time}");
                 Console.Write($"\nEnter new {promptText} time (hh:mm am/pm) (leave blank to keep current): ");
                 string? timeInput = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(timeInput))
                 {
-                    return time;
+                    break;
                 }
                 else
                 {
