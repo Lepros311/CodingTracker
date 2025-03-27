@@ -14,9 +14,9 @@ namespace CodingTracker
 
             DateTime date = UI.PromptForDate();
 
-            DateTime startTime = UI.PromptForStartTime();
+            DateTime startTime = UI.PromptForTime("start");
 
-            DateTime endTime = UI.PromptForEndTime();
+            DateTime endTime = UI.PromptForTime("end");
 
             using (var connection = new SQLiteConnection($"Data Source={dbPath}"))
             {
@@ -56,8 +56,8 @@ namespace CodingTracker
             int recordId = UI.PromptForRecordId("edit");
 
             DateTime date = DateTime.Now;
-            DateTime startTime = DateTime.Now;
-            DateTime endTime = DateTime.Now;
+            DateTime? startTime = DateTime.Now;
+            DateTime? endTime = DateTime.Now;
 
             using (var connection = new SQLiteConnection($"Data Source={dbPath}"))
             {
@@ -88,8 +88,8 @@ namespace CodingTracker
             Display.PrintEditRecordData(recordId, date, startTime, endTime);
 
             date = UI.PromptForNewDate(date);
-            startTime = UI.PromptForNewStartTime(startTime);
-            endTime = UI.PromptForNewEndTime(endTime);
+            startTime = UI.PromptForNewTime(startTime, "start");
+            endTime = UI.PromptForNewTime(endTime, "end");
 
             using (var connection = new SQLiteConnection($"Data Source={dbPath}"))
             {

@@ -1,5 +1,4 @@
-﻿using Spectre.Console;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Globalization;
 
 namespace CodingTracker
 {
@@ -11,11 +10,15 @@ namespace CodingTracker
             bool isValidInput = false;
             do
             {
-                Console.Write("\nEnter the Date (yyyy-MM-dd): ");
-                if (!DateTime.TryParse(Console.ReadLine(), out date))
+                Console.Write("\nEnter the date (mm/dd/yyyy): ");
+                string? dateInput = Console.ReadLine();
+                //isValidInput = Validation.IsValidDate(dateInput);
+                string format = "MM/dd/yyyy";
+                CultureInfo provider = CultureInfo.InvariantCulture;
+                if (!DateTime.TryParseExact(dateInput, format, provider, DateTimeStyles.None, out date))
                 {
                     isValidInput = false;
-                    Console.WriteLine("Invalid date format. Please enter a date in the format yyyy-MM-dd.");
+                    Console.WriteLine("Invalid date format. Please enter a date in the format mm/dd/yyyy.");
                 }
                 else
                 {
@@ -26,35 +29,30 @@ namespace CodingTracker
             return date;
         }
 
-        public static DateTime PromptForStartTime()
+        public static DateTime PromptForNewDate(DateTime date)
         {
-            DateTime startTime;
-            bool isValidInput = false;
-            do
+            Console.Write("\nEnter new date (mm/dd/yyyy) (leave blank to keep current): ");
+            string? dateInput = Console.ReadLine();
+            string format = "MM/dd/yyyy";
+            CultureInfo provider = CultureInfo.InvariantCulture;
+            if (!string.IsNullOrWhiteSpace(dateInput) && DateTime.TryParseExact(dateInput, format, provider, DateTimeStyles.None, out DateTime newDate))
             {
-                Console.Write("\nEnter the start time: ");
-                if (!DateTime.TryParse(Console.ReadLine(), out startTime))
-                {
-                    isValidInput = false;
-                    Console.WriteLine("Invalid time format. Please enter a time in the format hh:mm.");
-                }
-                else
-                {
-                    isValidInput = true;
-                }
-            } while (isValidInput == false);
+                date = newDate;
+            }
 
-            return startTime;
+            return date;
         }
 
-        public static DateTime PromptForEndTime()
+        public static DateTime PromptForTime(string promptText)
         {
-            DateTime endTime;
+            DateTime time;
             bool isValidInput = false;
             do
             {
-                Console.Write("\nEnter the end time: ");
-                if (!DateTime.TryParse(Console.ReadLine(), out endTime))
+                Console.Write($"\nEnter the {promptText} time (hh:mm am/pm): ");
+                string format = "hh\\:mm tt";
+                CultureInfo provider = CultureInfo.InvariantCulture;
+                if (!DateTime.TryParseExact(Console.ReadLine(), format, provider, DateTimeStyles.None, out time))
                 {
                     isValidInput = false;
                     Console.WriteLine("Invalid time format. Please enter a time in the format hh:mm.");
@@ -65,7 +63,21 @@ namespace CodingTracker
                 }
             } while (isValidInput == false);
 
-            return endTime;
+            return time;
+        }
+
+        public static DateTime? PromptForNewTime(DateTime? time, string promptText)
+        {
+            Console.Write($"\nEnter new {promptText} time (hh:mm am/pm) (leave blank to keep current): ");
+            string? timeInput = Console.ReadLine();
+            string format = "hh\\:mm tt";
+            CultureInfo provider = CultureInfo.InvariantCulture;
+            if (!string.IsNullOrWhiteSpace(timeInput) && DateTime.TryParseExact(timeInput, format, provider, DateTimeStyles.None, out DateTime newTime))
+            {
+                time = newTime;
+            }
+
+            return time;
         }
 
         public static int PromptForRecordId(string promptText)
@@ -78,42 +90,6 @@ namespace CodingTracker
             } while (recordId <= 0);
 
             return recordId;
-        }
-
-        public static DateTime PromptForNewDate(DateTime date)
-        {
-            Console.Write("\nEnter new date (yyyy-MM-dd) (leave blank to keep current): ");
-            string? dateInput = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(dateInput) && DateTime.TryParse(dateInput, out DateTime newDate))
-            {
-                date = newDate;
-            }
-
-            return date;
-        }
-
-        public static DateTime PromptForNewStartTime(DateTime startTime)
-        {
-            Console.Write("\nEnter new start time (hh:mm) (leave blank to keep current): ");
-            string? startTimeInput = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(startTimeInput) && DateTime.TryParse(startTimeInput, out DateTime newStartTime))
-            {
-                startTime = newStartTime;
-            }
-
-            return startTime;
-        }
-
-        public static DateTime PromptForNewEndTime(DateTime endTime)
-        {
-            Console.Write("\nEnter new end time (hh:mm) (leave blank to keep current): ");
-            string? endTimeInput = Console.ReadLine();
-            if (!string.IsNullOrWhiteSpace(endTimeInput) && DateTime.TryParse(endTimeInput, out DateTime newEndTime))
-            {
-                endTime = newEndTime;
-            }
-
-            return endTime;
         }
 
         public static string PromptForDeleteConfirmation(int recordId)

@@ -77,7 +77,7 @@ namespace CodingTracker
             var table = new Table()
                 .Border(TableBorder.Rounded)
                 .AddColumn(new TableColumn("[dodgerblue1]ID[/]").Centered())
-                .AddColumn(new TableColumn("[dodgerblue1]Date[/]").Centered())
+                .AddColumn(new TableColumn("[dodgerblue1]Date ▼[/]").Centered())
                 .AddColumn(new TableColumn("[dodgerblue1]Start Time[/]").Centered())
                 .AddColumn(new TableColumn("[dodgerblue1]End Time[/]").Centered())
                 .AddColumn(new TableColumn("[dodgerblue1]Duration[/]").Centered());
@@ -93,7 +93,7 @@ namespace CodingTracker
             {
                 table.AddRow(
                     session.Id.ToString(),
-                    session.Date.ToString("yyyy-MM-dd"),
+                    session.Date.ToString("MM/dd/yyyy"),
                     session.StartTime.ToString("hh:mm tt"),
                     session.EndTime.ToString("hh:mm tt"),
                     session.Duration.ToString(@"hh\:mm") // Format duration as hours and minutes
@@ -104,12 +104,12 @@ namespace CodingTracker
             AnsiConsole.Write(table);
         }
 
-        public static void PrintEditRecordData(int recordId, DateTime date, DateTime startTime, DateTime endTime)
+        public static void PrintEditRecordData(int recordId, DateTime? date, DateTime? startTime, DateTime? endTime)
         {
             Console.WriteLine($"Selected record ID: {recordId}");
-            Console.WriteLine($"Date: {date:yyyy-MM-dd}");
-            Console.WriteLine($"Start Time: {startTime}");
-            Console.WriteLine($"End Time: {endTime}");
+            Console.WriteLine($"Date: {date:MM/dd/yyyy}");
+            Console.WriteLine($"Start Time: {startTime:hh:mm tt}");
+            Console.WriteLine($"End Time: {endTime:hh:mm tt}");
         }
     }
 }

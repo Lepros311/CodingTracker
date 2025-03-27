@@ -38,7 +38,7 @@ namespace CodingTracker.Model
             using (var connection = new SQLiteConnection(dbPath))
             {
                 connection.Open();
-                string query = @"SELECT * FROM CodingSessions ORDER BY Date DESC";
+                string query = @"SELECT * FROM CodingSessions ORDER BY Date DESC, StartTime DESC";
 
                 using (var command = new SQLiteCommand(query, connection))
                 using (var reader = command.ExecuteReader())
