@@ -65,20 +65,6 @@ namespace CodingTracker
             return time;
         }
 
-        //public static DateTime? PromptForNewTime(DateTime? time, string promptText)
-        //{
-        //    Console.Write($"\nEnter new {promptText} time (hh:mm am/pm) (leave blank to keep current): ");
-        //    string? timeInput = Console.ReadLine();
-        //    string format = "hh\\:mm tt";
-        //    CultureInfo provider = CultureInfo.InvariantCulture;
-        //    if (!string.IsNullOrWhiteSpace(timeInput) && DateTime.TryParseExact(timeInput, format, provider, DateTimeStyles.None, out DateTime newTime))
-        //    {
-        //        time = newTime;
-        //    }
-
-        //    return time;
-        //}
-
         public static DateTime? PromptForNewTime(DateTime? time, string promptText)
         {
             do
@@ -91,14 +77,10 @@ namespace CodingTracker
                 }
                 else
                 {
-                    time = Validation.ValidateDate(timeInput);
+                    time = Validation.ValidateTime(timeInput);
                     if (time == null)
                     {
-                        Console.WriteLine("Invalid date format. Please enter a date in the format mm/dd/yyyy.");
-                    }
-                    else
-                    {
-                        time = Validation.ValidateDate(timeInput);
+                        Console.WriteLine("Invalid time format. Please enter a time in the format hh:mm am/pm.");
                     }
                 }
             } while (time == null);
