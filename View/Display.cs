@@ -94,9 +94,9 @@ namespace CodingTracker
                 table.AddRow(
                     session.Id.ToString(),
                     session.Date.ToString("MM/dd/yyyy"),
-                    session.StartTime.ToString("hh:mm tt"),
-                    session.EndTime.ToString("hh:mm tt"),
-                    session.Duration.ToString(@"hh\:mm") // Format duration as hours and minutes
+                    session.StartTime.ToString("h:mm tt"),
+                    session.EndTime.ToString("h:mm tt"),
+                    session.Duration.ToString(@"h\:mm") // Format duration as hours and minutes
                 );
             }
 
@@ -108,8 +108,8 @@ namespace CodingTracker
         {
             Console.WriteLine($"Selected record ID: {recordId}");
             Console.WriteLine($"Date: {date:MM/dd/yyyy}");
-            Console.WriteLine($"Start Time: {startTime:hh:mm tt}");
-            Console.WriteLine($"End Time: {endTime:hh:mm tt}");
+            Console.WriteLine($"Start Time: {startTime:h:mm tt}");
+            Console.WriteLine($"End Time: {endTime:h:mm tt}");
         }
     }
 }

@@ -1,18 +1,35 @@
-﻿using Microsoft.SqlServer.Server;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace CodingTracker
 {
     internal class Validation
     {
-        //public static bool IsValidDate(string dateInput)
-        //{
-        //    string format = "MM/dd/yyyy";
-        //    CultureInfo provider = CultureInfo.InvariantCulture;
-        //    if (!DateTime.TryParseExact(dateInput, format, provider, DateTimeStyles.None, out date))
+        public static DateTime? ValidateDate(string dateInput)
+        {
+            string format = "MM/dd/yyyy";
+            CultureInfo provider = CultureInfo.InvariantCulture;
+            if (!DateTime.TryParseExact(dateInput, format, provider, DateTimeStyles.None, out DateTime date))
+            {
+                return null;
+            }
+            else
+            {
+                return date.Date;
+            }
+        }
 
-        //    return true;
-        //}
+        public static DateTime? ValidateTime(string timeInput)
+        {
+            string format = "h:mm tt";
+            CultureInfo provider = CultureInfo.InvariantCulture;
+            if (!DateTime.TryParseExact(timeInput, format, provider, DateTimeStyles.None, out DateTime time))
+            {
+                return null;
+            }
+            else
+            {
+                return time;
+            }
+        }
     }
 }

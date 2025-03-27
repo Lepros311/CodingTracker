@@ -4,78 +4,105 @@ namespace CodingTracker
 {
     class UI
     {
-        public static DateTime PromptForDate()
+        public static DateTime? PromptForDate()
         {
-            DateTime date;
-            bool isValidInput = false;
+            DateTime? date = null;
             do
             {
                 Console.Write("\nEnter the date (mm/dd/yyyy): ");
                 string? dateInput = Console.ReadLine();
-                //isValidInput = Validation.IsValidDate(dateInput);
-                string format = "MM/dd/yyyy";
-                CultureInfo provider = CultureInfo.InvariantCulture;
-                if (!DateTime.TryParseExact(dateInput, format, provider, DateTimeStyles.None, out date))
+                date = Validation.ValidateDate(dateInput!);
+                if (date == null)
                 {
-                    isValidInput = false;
                     Console.WriteLine("Invalid date format. Please enter a date in the format mm/dd/yyyy.");
+                }
+            } while (date == null);
+
+            return date;
+        }
+
+        public static DateTime? PromptForNewDate(DateTime? date)
+        {
+            do
+            {
+                Console.Write("\nEnter new date (mm/dd/yyyy) (leave blank to keep current): ");
+                string? dateInput = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(dateInput))
+                {
+                    return date;
                 }
                 else
                 {
-                    isValidInput = true;
+                    date = Validation.ValidateDate(dateInput);
+                    if (date == null)
+                    {
+                        Console.WriteLine("Invalid date format. Please enter a date in the format mm/dd/yyyy.");
+                    }
+                    else
+                    {
+                        date = Validation.ValidateDate(dateInput);
+                    }
                 }
-            } while (isValidInput == false);
+            } while (date == null);
 
             return date;
         }
 
-        public static DateTime PromptForNewDate(DateTime date)
+        public static DateTime? PromptForTime(string promptText)
         {
-            Console.Write("\nEnter new date (mm/dd/yyyy) (leave blank to keep current): ");
-            string? dateInput = Console.ReadLine();
-            string format = "MM/dd/yyyy";
-            CultureInfo provider = CultureInfo.InvariantCulture;
-            if (!string.IsNullOrWhiteSpace(dateInput) && DateTime.TryParseExact(dateInput, format, provider, DateTimeStyles.None, out DateTime newDate))
-            {
-                date = newDate;
-            }
-
-            return date;
-        }
-
-        public static DateTime PromptForTime(string promptText)
-        {
-            DateTime time;
-            bool isValidInput = false;
+            DateTime? time;
             do
             {
                 Console.Write($"\nEnter the {promptText} time (hh:mm am/pm): ");
-                string format = "hh\\:mm tt";
-                CultureInfo provider = CultureInfo.InvariantCulture;
-                if (!DateTime.TryParseExact(Console.ReadLine(), format, provider, DateTimeStyles.None, out time))
+                string? timeInput = Console.ReadLine();
+                time = Validation.ValidateTime(timeInput!);
+                if (time == null)
                 {
-                    isValidInput = false;
-                    Console.WriteLine("Invalid time format. Please enter a time in the format hh:mm.");
+                    Console.WriteLine("Invalid time format. Please enter a time in the format hh:mm am/pm.");
                 }
-                else
-                {
-                    isValidInput = true;
-                }
-            } while (isValidInput == false);
+            } while (time == null);
 
             return time;
         }
 
+        //public static DateTime? PromptForNewTime(DateTime? time, string promptText)
+        //{
+        //    Console.Write($"\nEnter new {promptText} time (hh:mm am/pm) (leave blank to keep current): ");
+        //    string? timeInput = Console.ReadLine();
+        //    string format = "hh\\:mm tt";
+        //    CultureInfo provider = CultureInfo.InvariantCulture;
+        //    if (!string.IsNullOrWhiteSpace(timeInput) && DateTime.TryParseExact(timeInput, format, provider, DateTimeStyles.None, out DateTime newTime))
+        //    {
+        //        time = newTime;
+        //    }
+
+        //    return time;
+        //}
+
         public static DateTime? PromptForNewTime(DateTime? time, string promptText)
         {
-            Console.Write($"\nEnter new {promptText} time (hh:mm am/pm) (leave blank to keep current): ");
-            string? timeInput = Console.ReadLine();
-            string format = "hh\\:mm tt";
-            CultureInfo provider = CultureInfo.InvariantCulture;
-            if (!string.IsNullOrWhiteSpace(timeInput) && DateTime.TryParseExact(timeInput, format, provider, DateTimeStyles.None, out DateTime newTime))
+            do
             {
-                time = newTime;
-            }
+                Console.WriteLine($"{time}");
+                Console.Write($"\nEnter new {promptText} time (hh:mm am/pm) (leave blank to keep current): ");
+                string? timeInput = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(timeInput))
+                {
+                    return time;
+                }
+                else
+                {
+                    time = Validation.ValidateDate(timeInput);
+                    if (time == null)
+                    {
+                        Console.WriteLine("Invalid date format. Please enter a date in the format mm/dd/yyyy.");
+                    }
+                    else
+                    {
+                        time = Validation.ValidateDate(timeInput);
+                    }
+                }
+            } while (time == null);
 
             return time;
         }

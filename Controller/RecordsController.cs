@@ -12,11 +12,11 @@ namespace CodingTracker
 
             string? dbPath = ConfigurationManager.AppSettings.Get("dbPath");
 
-            DateTime date = UI.PromptForDate();
+            DateTime? date = UI.PromptForDate();
 
-            DateTime startTime = UI.PromptForTime("start");
+            DateTime? startTime = UI.PromptForTime("start");
 
-            DateTime endTime = UI.PromptForTime("end");
+            DateTime? endTime = UI.PromptForTime("end");
 
             using (var connection = new SQLiteConnection($"Data Source={dbPath}"))
             {
@@ -29,7 +29,8 @@ namespace CodingTracker
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = insertQuery;
-                    command.Parameters.AddWithValue("@date", date.ToString("yyyy-MM-dd"));
+                    //command.Parameters.AddWithValue("@date", date.Value.ToString("MM/dd/yyyy"));
+                    command.Parameters.AddWithValue("@date", date);
                     command.Parameters.AddWithValue("@startTime", startTime);
                     command.Parameters.AddWithValue("@endTime", endTime);
 
@@ -55,9 +56,9 @@ namespace CodingTracker
 
             int recordId = UI.PromptForRecordId("edit");
 
-            DateTime date = DateTime.Now;
-            DateTime? startTime = DateTime.Now;
-            DateTime? endTime = DateTime.Now;
+            DateTime? date = null;
+            DateTime? startTime = null;
+            DateTime? endTime = null;
 
             using (var connection = new SQLiteConnection($"Data Source={dbPath}"))
             {
@@ -103,7 +104,7 @@ namespace CodingTracker
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = updateQuery;
-                    command.Parameters.AddWithValue("@date", date.ToString("yyyy-MM-dd"));
+                    command.Parameters.AddWithValue("@date", date);
                     command.Parameters.AddWithValue("@startTime", startTime);
                     command.Parameters.AddWithValue("@endTime", endTime);
                     command.Parameters.AddWithValue("@recordId", recordId);
