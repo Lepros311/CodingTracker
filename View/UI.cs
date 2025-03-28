@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-
-namespace CodingTracker
+﻿namespace CodingTracker
 {
     class UI
     {
@@ -91,11 +89,16 @@ namespace CodingTracker
         public static int PromptForRecordId(string promptText)
         {
             int recordId = 0;
+            bool isValidInput = false;
             do
             {
                 Console.Write($"\nEnter the ID of the record you want to {promptText}: ");
-                recordId = RecordsController.GetRecordId(recordId);
-            } while (recordId <= 0);
+                string? recordIdInput = Console.ReadLine();
+                (string message, bool validStatus, int recordId) result = Validation.ValidateRecordId(recordIdInput);
+                Console.WriteLine($"{result.message}");
+                isValidInput = result.validStatus;
+                recordId = result.recordId;
+            } while (isValidInput == false);
 
             return recordId;
         }
@@ -103,20 +106,26 @@ namespace CodingTracker
         public static string PromptForDeleteConfirmation(int recordId)
         {
             string? confirmation;
+            bool isValidInput = false;
             do
             {
                 Console.Write($"Are you sure you want to delete the record with ID {recordId}? (y/n): ");
                 confirmation = Console.ReadLine();
-                if (confirmation?.ToLower() == "n")
+                string validatedConfirmation = Validation.ValidateDeleteConfirmation(confirmation);
+                if (validatedConfirmation == "n")
                 {
                     Console.WriteLine("Deletion canceled.");
                     return "n";
                 }
-                else if (confirmation?.ToLower() != "y")
+                else if (validatedConfirmation != "y")
                 {
-                    Console.WriteLine("Invalid response.");
+                    Console.WriteLine("Invalid response.\n");
                 }
-            } while ((confirmation != "y") && (confirmation != "n"));
+                else
+                {
+                    isValidInput = true;
+                }
+            } while (isValidInput == false);
 
             return "y";
         }

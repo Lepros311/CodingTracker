@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using Spectre.Console;
+using System.Globalization;
 
 namespace CodingTracker
 {
@@ -30,6 +31,30 @@ namespace CodingTracker
             {
                 return time;
             }
+        }
+
+        public static (string message, bool validStatus, int recordId) ValidateRecordId(string? recordIdInput)
+        {
+            if (!int.TryParse(recordIdInput, out int recordId))
+                return ("Invalid ID. Please enter a numeric value.", false, recordId);
+            else if (RecordsController.GetRecordIdCount(recordId) <= 0)
+                return ("Record not found. Please enter a valid record ID.", false, recordId);
+            else
+                return ("", true, recordId);
+        }
+
+        public static string ValidateDeleteConfirmation(string? confirmationInput)
+        {
+            if (confirmationInput?.ToLower() == "n")
+            {
+                return "n";
+            }
+            else if (confirmationInput?.ToLower() != "y")
+            {
+                return "";
+            }
+
+            return "y";
         }
     }
 }

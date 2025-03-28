@@ -160,38 +160,25 @@ namespace CodingTracker
             }
         }
 
-        public static int GetRecordId(int recordId)
+        public static int GetRecordIdCount(int recordId)
         {
             string? dbPath = ConfigurationManager.AppSettings.Get("dbPath");
-
+            int count;
             using (var connection = new SQLiteConnection($"Data Source={dbPath}"))
             {
                 connection.Open();
 
-                if (!int.TryParse(Console.ReadLine(), out recordId))
+                string checkCodingSessionIdQuery = "SELECT COUNT(*) FROM CodingSessions WHERE Id = @recordId";
+                using (var command = connection.CreateCommand())
                 {
-                    Console.WriteLine("Invalid ID. Please enter a numeric value.");
-                    return 0;
-                }
-                else
-                {
-                    string checkCodingSessionIdQuery = "SELECT COUNT(*) FROM CodingSessions WHERE Id = @recordId";
-                    using (var command = connection.CreateCommand())
-                    {
-                        command.CommandText = checkCodingSessionIdQuery;
-                        command.Parameters.AddWithValue("@recordId", recordId);
+                    command.CommandText = checkCodingSessionIdQuery;
+                    command.Parameters.AddWithValue("@recordId", recordId);
 
-                        int count = Convert.ToInt32(command.ExecuteScalar());
-                        if (count <= 0)
-                        {
-                            Console.WriteLine("Record not found. Please enter a valid record ID.");
-                            return 0;
-                        }
-                    }
+                    count = Convert.ToInt32(command.ExecuteScalar());
                 }
-                return recordId;
             }
-        }
 
+            return count;
+        }
     }
 }
