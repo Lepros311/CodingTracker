@@ -1,8 +1,6 @@
-﻿using System.Configuration;
-using System.Data.SQLite;
-using CodingTracker.Model;
+﻿using CodingTracker.Model;
 using Spectre.Console;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Configuration;
 
 namespace CodingTracker
 {
@@ -24,12 +22,8 @@ namespace CodingTracker
             return menuChoice;
         }
 
-        public static void PrintReport((int TotalDistinctDays, int TotalSessions, string TotalDuration) reportData)
+        public static void PrintReport((int TotalDistinctDays, int TotalSessions, string TotalDuration, int LongestStreak) reportData)
         {
-            var repository = new CodingSessionRepository(ConfigurationManager.AppSettings.Get("dbPath"));
-            var sessions = repository.GetAllCodingSessions();
-
-            // Clear the console
             Console.Clear();
 
             // Print a simple heading
@@ -37,27 +31,20 @@ namespace CodingTracker
             rule.Justification = Justify.Left;
             AnsiConsole.Write(rule);
 
-                      var table = new Table()
-                        .Border(TableBorder.Rounded)
-                        .AddColumn(new TableColumn("[dodgerBlue1]Total Days[/]").Centered())
-                        .AddColumn(new TableColumn("[dodgerBlue1]Total Sessions[/]").Centered())
-                        .AddColumn(new TableColumn("[dodgerBlue1]Total Duration[/]").Centered());
+            var table = new Table()
+              .Border(TableBorder.Rounded)
+              .AddColumn(new TableColumn("[dodgerBlue1]Total Days[/]").Centered())
+              .AddColumn(new TableColumn("[dodgerBlue1]Total Sessions[/]").Centered())
+              .AddColumn(new TableColumn("[dodgerBlue1]Total Duration[/]").Centered())
+              .AddColumn(new TableColumn("[dodgerBlue1]Longest Streak of Days[/]").Centered());
 
             table.AddRow(
                 reportData.TotalDistinctDays.ToString(),
                 reportData.TotalSessions.ToString(),
-                reportData.TotalDuration.ToString());
-
-            //var longestStreaks = codingSession.CalculateStreak();
-            //    Console.WriteLine($"\nLongest Streaks:");
-            //    //foreach (var streak in longestStreaks)
-            //    {
-            //        //Console.WriteLine($"{streak.Key} - {streak.Value} days in a row");
-            //    }
-            //}
+                reportData.TotalDuration.ToString(),
+                reportData.LongestStreak.ToString());
 
             AnsiConsole.Write(table);
-            
         }
 
         public static void PrintAllRecords(string heading)
@@ -113,4 +100,4 @@ namespace CodingTracker
         }
     }
 }
-    
+

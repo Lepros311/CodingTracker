@@ -2,11 +2,6 @@
 using CodingTracker.Model;
 using System.Configuration;
 
-string? userInput;
-string? menuChoice;
-bool isValidInput = false;
-int[] menuNumbers = [0, 1, 2, 3, 4, 5];
-
 Console.Title = "Coding Tracker";
 
 string? dbPath = ConfigurationManager.AppSettings.Get("dbPath");
@@ -17,6 +12,8 @@ var repository = new CodingSessionRepository(connection);
 
 repository.CreateTable();
 repository.SeedDatabase();
+
+string? menuChoice;
 
 do
 {
@@ -31,25 +28,25 @@ do
             break;
         case "View All Records":
             Display.PrintAllRecords("View All Records");
-            ReturnToMainMenu();
+            UI.ReturnToMainMenu();
             break;
         case "Add Record":
             RecordsController.AddRecord();
-            ReturnToMainMenu();
+            UI.ReturnToMainMenu();
             break;
         case "Edit Record":
             RecordsController.EditRecord();
-            ReturnToMainMenu();
+            UI.ReturnToMainMenu();
             break;
         case "Delete Record":
             RecordsController.DeleteRecord();
-            ReturnToMainMenu();
+            UI.ReturnToMainMenu();
             break;
         case "View Report":
             repository = new CodingSessionRepository(connection);
             var reportData = repository.GetReportData();
             Display.PrintReport(reportData);
-            ReturnToMainMenu();
+            UI.ReturnToMainMenu();
             break;
         default:
             Console.WriteLine("Invalid choice.");
@@ -57,11 +54,7 @@ do
     }
 } while (menuChoice != "Close Application");
 
-void ReturnToMainMenu()
-{
-    Console.Write("\nPress any key to return to the Main Menu...");
-    Console.ReadKey();
-}
+
 
 
 

@@ -1,6 +1,9 @@
 ﻿using System.Configuration;
 using System.Data.SQLite;
 using Dapper;
+using System.Globalization;
+using System;
+using System.Security.Cryptography;
 
 namespace CodingTracker.Model
 {
@@ -60,7 +63,7 @@ namespace CodingTracker.Model
             return sessions;
         }
 
-        public (int TotalDistinctDays, int TotalSessions, string TotalDuration) GetReportData()
+        public (int TotalDistinctDays, int TotalSessions, string TotalDuration, int LongestStreak) GetReportData()
         {
             using (var connection = new SQLiteConnection(dbPath))
             {
@@ -86,12 +89,52 @@ namespace CodingTracker.Model
                     timeSpan.Minutes,
                     timeSpan.Seconds);
 
+                var repository = new CodingSessionRepository(ConfigurationManager.AppSettings.Get("dbPath"));
+                int longestStreak = repository.CalculateStreak();
+
                 return (
                     TotalDistinctDays: totalDistinctDays,
                     TotalSessions: totalSessions,
-                    TotalDuration: formattedDuration
+                    TotalDuration: formattedDuration,
+                    LongestStreak: longestStreak
                 );
             }
+        }
+
+        public int CalculateStreak()
+        {
+            string? dbPath = ConfigurationManager.AppSettings.Get("dbPath");
+
+            int currentStreak = 0;
+            int longestStreak = 0;
+            DateTime? lastDate = null;
+
+            using (var connection = new SQLiteConnection($"Data Source={dbPath}"))
+            {
+                connection.Open();
+
+                string query = @"SELECT DISTINCT Date FROM CodingSessions ORDER BY Date;";
+
+                using (var command = new SQLiteCommand(query, connection))
+                using (var reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        DateTime date = DateTime.Parse(reader["Date"].ToString(), CultureInfo.InvariantCulture);
+                       
+                        if (lastDate.HasValue && (date - lastDate.Value).Days == 1)
+                            currentStreak++;
+                        else
+                            currentStreak = 1;
+                            
+                        longestStreak = Math.Max(longestStreak, currentStreak);
+                        
+                        lastDate = date;
+                    }
+                }      
+            }
+
+            return longestStreak;
         }
 
         public void SeedDatabase()
@@ -99,22 +142,56 @@ namespace CodingTracker.Model
             using (var dbConnection = new SQLiteConnection(_connection))
             {
                 dbConnection.Open();
-                // Check if there are any existing records
+
                 var existingSessions = dbConnection.QuerySingleOrDefault<int>("SELECT COUNT(*) FROM CodingSessions;");
 
                 if (existingSessions == 0)
                 {
-                    // Create five default coding sessions
-                    var sessions = new List<CodingSession>
+                    List<CodingSession> sessions = new List<CodingSession>();
+                    HashSet<DateTime> usedDates = new HashSet<DateTime>();
+                    Random random = new Random();
+                    DateTime today = DateTime.Now;
+                    DateTime startDate = today.AddDays(-30);
+                    
+                    for (int i = 0; i < 10; i++)
                     {
-                        new CodingSession(new DateTime(2023, 10, 1), new DateTime(2023, 10, 1, 9, 0, 0), new DateTime(2023, 10, 1, 10, 0, 0)),
-                        new CodingSession(new DateTime(2023, 10, 2), new DateTime(2023, 10, 2, 11, 0, 0), new DateTime(2023, 10, 2, 12, 30, 0)),      
-                        new CodingSession(new DateTime(2023, 10, 3), new DateTime(2023, 10, 3, 14, 0, 0), new DateTime(2023, 10, 3, 15, 15, 0)),
-                        new CodingSession(new DateTime(2023, 10, 4), new DateTime(2023, 10, 4, 16, 0, 0), new DateTime(2023, 10, 4, 17, 0, 0)),
-                        new CodingSession(new DateTime(2023, 10, 5), new DateTime(2023, 10, 5, 18, 0, 0), new DateTime(2023, 10, 5, 19, 30, 0))
-                    };
+                        DateTime randomDate;
 
-                    // Insert each session into the database
+                        do
+                        {
+                            randomDate = startDate.AddDays(random.Next(0, 31));
+                        } while (usedDates.Contains(randomDate));
+
+                        usedDates.Add(randomDate);
+
+                        int startHour = random.Next(6, 24);
+                        int startMinute = random.Next(0, 4) * 15;
+                        DateTime startTime = randomDate.Date.AddHours(startHour).AddMinutes(startMinute);
+
+                        int durationMinutes = random.Next(30, 301);
+                        TimeSpan duration = TimeSpan.FromMinutes(durationMinutes);
+                        DateTime endTime = startTime.Add(duration);
+
+                        int endMinute = endTime.Minute;
+                        if (endMinute % 15 != 0)
+                        {
+                            endMinute = (endMinute / 15) * 15 + 15;
+                            if (endMinute >= 60)
+                            {
+                                endMinute = 0;
+                                endTime = endTime.AddHours(1);
+                            }
+                        }
+                        endTime = new DateTime(endTime.Year, endTime.Month, endTime.Day, endTime.Hour, endMinute, 0);
+
+                        if (endTime.Date > randomDate.Date)
+                            endTime = randomDate.Date.AddHours(23).AddMinutes(59);
+
+                        sessions.Add(new CodingSession { Date = randomDate, StartTime = startTime, EndTime = endTime });
+                    }
+
+                    sessions.Sort((s1, s2) => s1.Date.CompareTo(s2.Date));
+
                     foreach (var session in sessions)
                     {
                         string insertSql = @"
