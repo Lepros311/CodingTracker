@@ -1,5 +1,4 @@
-﻿using System.Configuration;
-using System.Data.SQLite;
+﻿using System.Data.SQLite;
 using System.Globalization;
 using Dapper;
 using System;

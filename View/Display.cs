@@ -41,7 +41,7 @@ namespace CodingTracker
             table.AddRow(
                 reportData.TotalDistinctDays.ToString(),
                 reportData.TotalSessions.ToString(),
-                reportData.TotalDuration.ToString(),
+                reportData.TotalDuration,
                 reportData.LongestStreak.ToString());
 
             AnsiConsole.Write(table);

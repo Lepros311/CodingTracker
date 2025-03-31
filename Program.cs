@@ -4,8 +4,6 @@ using System.Configuration;
 
 Console.Title = "Coding Tracker";
 
-string? dbPath = ConfigurationManager.AppSettings.Get("dbPath");
-
 string connection = ConfigurationManager.ConnectionStrings["connection"].ConnectionString;
 
 var repository = new CodingSessionRepository(connection);

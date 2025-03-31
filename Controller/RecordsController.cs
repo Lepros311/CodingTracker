@@ -29,7 +29,6 @@ namespace CodingTracker
                 using (var command = connection.CreateCommand())
                 {
                     command.CommandText = insertQuery;
-                    //command.Parameters.AddWithValue("@date", date.Value.ToString("MM/dd/yyyy"));
                     command.Parameters.AddWithValue("@date", date);
                     command.Parameters.AddWithValue("@startTime", startTime);
                     command.Parameters.AddWithValue("@endTime", endTime);

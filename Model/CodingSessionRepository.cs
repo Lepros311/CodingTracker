@@ -1,9 +1,7 @@
-﻿using System.Configuration;
+﻿using Dapper;
+using System.Configuration;
 using System.Data.SQLite;
-using Dapper;
 using System.Globalization;
-using System;
-using System.Security.Cryptography;
 
 namespace CodingTracker.Model
 {
@@ -121,17 +119,17 @@ namespace CodingTracker.Model
                     while (reader.Read())
                     {
                         DateTime date = DateTime.Parse(reader["Date"].ToString(), CultureInfo.InvariantCulture);
-                       
+
                         if (lastDate.HasValue && (date - lastDate.Value).Days == 1)
                             currentStreak++;
                         else
                             currentStreak = 1;
-                            
+
                         longestStreak = Math.Max(longestStreak, currentStreak);
-                        
+
                         lastDate = date;
                     }
-                }      
+                }
             }
 
             return longestStreak;
@@ -152,7 +150,7 @@ namespace CodingTracker.Model
                     Random random = new Random();
                     DateTime today = DateTime.Now;
                     DateTime startDate = today.AddDays(-30);
-                    
+
                     for (int i = 0; i < 10; i++)
                     {
                         DateTime randomDate;
