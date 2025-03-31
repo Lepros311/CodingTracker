@@ -1,6 +1,6 @@
 # Coding Tracker
 
-The [Coding Tracker](https://www.thecsharpacademy.com/project/13/coding-tracker) project is focused on implementing Object Oriented Programming. It uses a SQLite databse to store coding sessions and Spectre.Console for formatting output. I used the Model-View-Controller pattern to organize my classes. This project is part of the curriculum from [The C# Academy](https://www.thecsharpacademy.com/).
+The [Coding Tracker](https://www.thecsharpacademy.com/project/13/coding-tracker) project is focused on implementing Object Oriented Programming. It uses a SQLite database to store coding sessions and Spectre.Console for formatting output. I used the Model-View-Controller pattern to organize my classes. This project is part of the curriculum from [The C# Academy](https://www.thecsharpacademy.com/).
 
 ## Requirements
 
