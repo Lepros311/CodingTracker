@@ -52,8 +52,8 @@
             do
             {
                 Console.Write($"\nEnter the {promptText} time (hh:mm am/pm): ");
-                string? timeInput = Console.ReadLine();
-                time = Validation.ValidateTime(timeInput!);
+                string timeInput = Console.ReadLine();
+                time = Validation.ValidateTime(timeInput);
                 if (time == null)
                 {
                     Console.WriteLine("Invalid time format. Please enter a time in the format hh:mm am/pm.");

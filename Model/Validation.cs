@@ -33,6 +33,14 @@ namespace CodingTracker
             }
         }
 
+        public static bool ValidateStartTimeIsLessThanEndTime(DateTime? start, DateTime? end)
+        {
+            if (start < end)
+                return true;
+            else
+                return false;   
+        }
+
         public static (string message, bool validStatus, int recordId) ValidateRecordId(string? recordIdInput)
         {
             if (!int.TryParse(recordIdInput, out int recordId))

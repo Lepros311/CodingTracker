@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CodingTracker")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0a757f9a127c87b5bee528ddd9fb04deac2cbda7")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f0bb90584e2aad9f12f698bcfe0b7986646b123d")]
 [assembly: System.Reflection.AssemblyProductAttribute("CodingTracker")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CodingTracker")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

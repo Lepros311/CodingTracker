@@ -18,6 +18,12 @@ namespace CodingTracker
 
             DateTime? endTime = UI.PromptForTime("end");
 
+            while (Validation.ValidateStartTimeIsLessThanEndTime(startTime, endTime) == false)
+            {
+                Console.WriteLine("The end time must be later than the start time.");
+                endTime = UI.PromptForTime("end");
+            } 
+
             using (var connection = new SQLiteConnection($"Data Source={dbPath}"))
             {
                 connection.Open();
@@ -90,6 +96,12 @@ namespace CodingTracker
             date = UI.PromptForNewDate(date);
             startTime = UI.PromptForNewTime(startTime, "start");
             endTime = UI.PromptForNewTime(endTime, "end");
+
+            while (Validation.ValidateStartTimeIsLessThanEndTime(startTime, endTime) == false)
+            {
+                Console.WriteLine("The end time must be later than the start time.");
+                endTime = UI.PromptForTime("end");
+            }
 
             using (var connection = new SQLiteConnection($"Data Source={dbPath}"))
             {
