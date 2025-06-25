@@ -45,7 +45,7 @@
           "auditLevel": "low",
           "auditMode": "direct"
         },
-        "SdkAnalysisLevel": "9.0.200"
+        "SdkAnalysisLevel": "9.0.300"
       },
       "frameworks": {
         "net8.0": {
@@ -57,11 +57,11 @@
             },
             "Spectre.Console": {
               "target": "Package",
-              "version": "[0.49.1, )"
+              "version": "[0.50.0, )"
             },
             "Spectre.Console.Cli": {
               "target": "Package",
-              "version": "[0.49.1, )"
+              "version": "[0.50.0, )"
             },
             "System.Data.SQLite": {
               "target": "Package",
@@ -84,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.301/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
