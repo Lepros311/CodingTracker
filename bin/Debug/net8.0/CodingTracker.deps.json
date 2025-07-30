@@ -9,8 +9,8 @@
       "CodingTracker/1.0.0": {
         "dependencies": {
           "Dapper": "2.1.66",
-          "Spectre.Console": "0.49.1",
-          "Spectre.Console.Cli": "0.49.1",
+          "Spectre.Console": "0.50.0",
+          "Spectre.Console.Cli": "0.50.0",
           "System.Data.SQLite": "1.0.119"
         },
         "runtime": {
@@ -105,33 +105,57 @@
           }
         }
       },
-      "Spectre.Console/0.49.1": {
+      "Spectre.Console/0.50.0": {
+        "dependencies": {
+          "System.Memory": "4.6.3"
+        },
         "runtime": {
           "lib/net8.0/Spectre.Console.dll": {
             "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.49.1.0"
+            "fileVersion": "0.50.0.0"
           }
         }
       },
-      "Spectre.Console.Cli/0.49.1": {
+      "Spectre.Console.Cli/0.50.0": {
         "dependencies": {
-          "Spectre.Console": "0.49.1"
+          "Spectre.Console": "0.50.0"
         },
         "runtime": {
           "lib/net8.0/Spectre.Console.Cli.dll": {
             "assemblyVersion": "0.0.0.0",
-            "fileVersion": "0.49.1.0"
+            "fileVersion": "0.50.0.0"
           }
         },
         "resources": {
           "lib/net8.0/de/Spectre.Console.Cli.resources.dll": {
             "locale": "de"
           },
+          "lib/net8.0/es/Spectre.Console.Cli.resources.dll": {
+            "locale": "es"
+          },
           "lib/net8.0/fr/Spectre.Console.Cli.resources.dll": {
             "locale": "fr"
           },
+          "lib/net8.0/it/Spectre.Console.Cli.resources.dll": {
+            "locale": "it"
+          },
+          "lib/net8.0/ja/Spectre.Console.Cli.resources.dll": {
+            "locale": "ja"
+          },
+          "lib/net8.0/ko/Spectre.Console.Cli.resources.dll": {
+            "locale": "ko"
+          },
+          "lib/net8.0/pt/Spectre.Console.Cli.resources.dll": {
+            "locale": "pt"
+          },
+          "lib/net8.0/ru/Spectre.Console.Cli.resources.dll": {
+            "locale": "ru"
+          },
           "lib/net8.0/sv/Spectre.Console.Cli.resources.dll": {
             "locale": "sv"
+          },
+          "lib/net8.0/zh-Hans/Spectre.Console.Cli.resources.dll": {
+            "locale": "zh-Hans"
           }
         }
       },
@@ -261,6 +285,7 @@
           }
         }
       },
+      "System.Memory/4.6.3": {},
       "System.Security.AccessControl/4.7.0": {
         "dependencies": {
           "Microsoft.NETCore.Platforms": "3.1.0",
@@ -393,19 +418,19 @@
       "path": "runtime.win-x86.runtime.native.system.data.sqlclient.sni/4.4.0",
       "hashPath": "runtime.win-x86.runtime.native.system.data.sqlclient.sni.4.4.0.nupkg.sha512"
     },
-    "Spectre.Console/0.49.1": {
+    "Spectre.Console/0.50.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-USV+pdu49OJ3nCjxNuw1K9Zw/c1HCBbwbjXZp0EOn6wM99tFdAtN34KEBZUMyRuJuXlUMDqhd8Yq9obW2MslYA==",
-      "path": "spectre.console/0.49.1",
-      "hashPath": "spectre.console.0.49.1.nupkg.sha512"
+      "sha512": "sha512-gkwYncFqMjlPF6Yz8KeVsKWpdfv15sr6uKm+vXVa/8Q4tvx52LPzMQOO5m+bXwI3AGGFeY3cok3ZJbguYizswg==",
+      "path": "spectre.console/0.50.0",
+      "hashPath": "spectre.console.0.50.0.nupkg.sha512"
     },
-    "Spectre.Console.Cli/0.49.1": {
+    "Spectre.Console.Cli/0.50.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wBZzyEbKqfPFFUPhV5E7/k4Kwy4UDO42IVzvzk0C4Pkjjw+NSd0EOBkIutYET4vJY4X81pD9ooQO9gfBGXj4+g==",
-      "path": "spectre.console.cli/0.49.1",
-      "hashPath": "spectre.console.cli.0.49.1.nupkg.sha512"
+      "sha512": "sha512-PrctsupqHEbyoP/iRL30awUWB0Z91i21myKl70qcPwoH6marEPkPyaPgzc37xFm9QSx+/jVBQGUH7tsn0mWGNQ==",
+      "path": "spectre.console.cli/0.50.0",
+      "hashPath": "spectre.console.cli.0.50.0.nupkg.sha512"
     },
     "Stub.System.Data.SQLite.Core.NetStandard/1.0.119": {
       "type": "package",
@@ -469,6 +494,13 @@
       "sha512": "sha512-v+XbyYHaZjDfn0ENmJEV1VYLgGgCTx1gnfOBcppowbpOAriglYgGCvFCPr2EEZyBvXlpxbEsTwkOlInl107ahA==",
       "path": "system.drawing.common/4.7.0",
       "hashPath": "system.drawing.common.4.7.0.nupkg.sha512"
+    },
+    "System.Memory/4.6.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-qdcDOgnFZY40+Q9876JUHnlHu7bosOHX8XISRoH94fwk6hgaeQGSgfZd8srWRZNt5bV9ZW2TljcegDNxsf+96A==",
+      "path": "system.memory/4.6.3",
+      "hashPath": "system.memory.4.6.3.nupkg.sha512"
     },
     "System.Security.AccessControl/4.7.0": {
       "type": "package",

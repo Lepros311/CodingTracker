@@ -2,7 +2,7 @@
 
 namespace CodingTracker
 {
-    internal class Validation
+    public class Validation
     {
         public DateTime? ValidateDate(string dateInput)
         {

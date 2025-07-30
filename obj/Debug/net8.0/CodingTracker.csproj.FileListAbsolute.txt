@@ -48,3 +48,10 @@ C:\Users\Andrew\Documents\coding stuff\C#\The C# Academy\CodingTracker\bin\Debug
 C:\Users\Andrew\Documents\coding stuff\C#\The C# Academy\CodingTracker\bin\Debug\net8.0\fr\Spectre.Console.Cli.resources.dll
 C:\Users\Andrew\Documents\coding stuff\C#\The C# Academy\CodingTracker\bin\Debug\net8.0\sv\Spectre.Console.Cli.resources.dll
 C:\Users\Andrew\Documents\coding stuff\C#\The C# Academy\CodingTracker\obj\Debug\net8.0\CodingTracker.sourcelink.json
+C:\Users\Andrew\Documents\coding stuff\C#\The C# Academy\CodingTracker\bin\Debug\net8.0\es\Spectre.Console.Cli.resources.dll
+C:\Users\Andrew\Documents\coding stuff\C#\The C# Academy\CodingTracker\bin\Debug\net8.0\it\Spectre.Console.Cli.resources.dll
+C:\Users\Andrew\Documents\coding stuff\C#\The C# Academy\CodingTracker\bin\Debug\net8.0\ja\Spectre.Console.Cli.resources.dll
+C:\Users\Andrew\Documents\coding stuff\C#\The C# Academy\CodingTracker\bin\Debug\net8.0\ko\Spectre.Console.Cli.resources.dll
+C:\Users\Andrew\Documents\coding stuff\C#\The C# Academy\CodingTracker\bin\Debug\net8.0\pt\Spectre.Console.Cli.resources.dll
+C:\Users\Andrew\Documents\coding stuff\C#\The C# Academy\CodingTracker\bin\Debug\net8.0\ru\Spectre.Console.Cli.resources.dll
+C:\Users\Andrew\Documents\coding stuff\C#\The C# Academy\CodingTracker\bin\Debug\net8.0\zh-Hans\Spectre.Console.Cli.resources.dll
