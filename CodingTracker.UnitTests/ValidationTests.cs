@@ -4,7 +4,7 @@ using System;
 namespace CodingTracker.UnitTests
 {
     [TestClass]
-    public class UnitTest1
+    public class ValidationTests
     {
         [TestMethod]
         public void ValidateDate_MMddyyyFormat_ReturnsInputtedDate()
