@@ -1,11 +1,10 @@
-﻿using Spectre.Console;
-using System.Globalization;
+﻿using System.Globalization;
 
 namespace CodingTracker
 {
     internal class Validation
     {
-        public static DateTime? ValidateDate(string dateInput)
+        public DateTime? ValidateDate(string dateInput)
         {
             string format = "MM/dd/yyyy";
             CultureInfo provider = CultureInfo.InvariantCulture;
@@ -38,7 +37,7 @@ namespace CodingTracker
             if (start < end)
                 return true;
             else
-                return false;   
+                return false;
         }
 
         public static (string message, bool validStatus, int recordId) ValidateRecordId(string? recordIdInput)

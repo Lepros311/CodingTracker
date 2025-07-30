@@ -9,7 +9,8 @@
             {
                 Console.Write("\nEnter the date (mm/dd/yyyy): ");
                 string? dateInput = Console.ReadLine();
-                date = Validation.ValidateDate(dateInput!);
+                var validation = new Validation();
+                date = validation.ValidateDate(dateInput!);
                 if (date == null)
                 {
                     Console.WriteLine("Invalid date format. Please enter a date in the format mm/dd/yyyy.");
