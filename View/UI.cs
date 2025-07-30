@@ -32,14 +32,16 @@
                 }
                 else
                 {
-                    date = Validation.ValidateDate(dateInput);
+                    var validation = new Validation();
+                    date = validation.ValidateDate(dateInput);
                     if (date == null)
                     {
                         Console.WriteLine("Invalid date format. Please enter a date in the format mm/dd/yyyy.");
                     }
                     else
                     {
-                        date = Validation.ValidateDate(dateInput);
+                        var validation2 = new Validation();
+                        date = validation.ValidateDate(dateInput);
                     }
                 }
             } while (date == null);
